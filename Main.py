@@ -44,10 +44,10 @@ class App(Frame):
         self.master.minsize( width = 600, height = 400)
         self.master.maxsize( width = 600, height = 400)
         self.master.resizable(1,1)
-        Button(self.master, text = "Dac ve tau",command=self.dacVeTau,height=3,width=13).place(relx=0,rely=0)
-        Button(self.master, text = "Thanh Toan",command=self.thanhToan,width=15,height=3).place(relx=0.33,rely=0)
-        Button(self.master, text = "Tim kiem ve", command=self.timKiem).place(relx=0.66,rely=0)
-        self.can=Canvas(self.master,bg='MediumPurple1',width=600,height=345,highlightbackground='MediumPurple1',highlightthickness=0)
+        Button(self.master, text = "Dac ve tau",command=self.dacVeTau,height=3,width=13,bg="pink").place(relx=0.004,rely=0)
+        Button(self.master, text = "Thanh Toan",command=self.thanhToan,width=13,height=3,bg="pink").place(relx=0.43,rely=0)
+        Button(self.master, text = "Tim kiem ve", command=self.timKiem,width=13,height=3,bg="pink").place(relx=0.83,rely=0)
+        self.can=Canvas(self.master,bg='Light blue',width=600,height=345,highlightbackground='Light blue',highlightthickness=0)
         self.can.place(x=0,y=55)
         # self.master.bind('<Motion>',self.location)
         self.master.mainloop()
@@ -71,25 +71,25 @@ class App(Frame):
                 self.line_dv.append([])
             for a in range(0,3):
                 self.spinbox.append([])# spinbox [0]:day, [1]:month, [2]:year
-            self.title_dv = Label(self.can,text="Dat ve tau",background='MediumPurple1')
-            self.label_dv[0]= Label(self.can,text="Ga den",background='MediumPurple1')
-            self.label_dv[1]= Label(self.can,text="Ga di",background='MediumPurple1')
+            self.title_dv = Label(self.can,text="Dat ve tau",background='thistle1')
+            self.label_dv[0]= Label(self.can,text="Ga den",background='thistle1')
+            self.label_dv[1]= Label(self.can,text="Ga di",background='thistle1')
             self.spinbox[0] =  Spinbox(self.can,from_=1,to_=31,width=2,textvariable=self.ngay)
             self.spinbox[1] =  Spinbox(self.can,from_=1,to_=12,width=2,textvariable=self.thang,command=self.thietLapGioiHanNgay)
-            self.spinbox[2] = Spinbox(self.can,from_=2015,to_=2030,width=8,textvariable=self.nam,command=self.thietLapGioiHanNgay)
-            self.button_dv[0]=Button(self.can,text="Tim Kiem",command=self.timVe)
+            self.spinbox[2] = Spinbox(self.can,from_=2015,to_=2030,width=7,textvariable=self.nam,command=self.thietLapGioiHanNgay)
             self.button_dv[1]=Button(self.can,text="Quay lai",command=self.quayLai_dv)
-            self.cbb_dv[0]=ttk.Combobox(self.can,width=17,textvariable=self.giaTriGaDen,values=tenGa)
-            self.cbb_dv[1]=ttk.Combobox(self.can,width=17,textvariable=self.giaTriGaDi,values=tenGa)
-            self.label_dv[0].place(relx=0.1,rely=0.15)
-            self.label_dv[1].place(relx=0.1,rely=0.25)
-            self.cbb_dv[0].place(relx=0.2,rely=0.15)
-            self.cbb_dv[1].place(relx=0.2,rely=0.25)
-            self.spinbox[0].place(relx=0.2,rely=0.34)
-            self.spinbox[1].place(relx=0.25,rely=0.34)
-            self.spinbox[2].place(relx=0.3,rely=0.34)
-            self.button_dv[0].place(relx=0.3,rely=0.42)
-            self.button_dv[1].place(relx=0.2,rely=0.42)
+            self.button_dv[0]=Button(self.can,text="Tim Kiem",command=self.timVe)
+            self.cbb_dv[0]=ttk.Combobox(self.can,width=18,textvariable=self.giaTriGaDen,values=tenGa)
+            self.cbb_dv[1]=ttk.Combobox(self.can,width=18,textvariable=self.giaTriGaDi,values=tenGa)
+            self.label_dv[0].place(relx=0.05,rely=0.15)
+            self.label_dv[1].place(relx=0.05,rely=0.25)
+            self.cbb_dv[0].place(relx=0.15,rely=0.15)
+            self.cbb_dv[1].place(relx=0.15,rely=0.25)
+            self.spinbox[0].place(relx=0.15,rely=0.34)
+            self.spinbox[1].place(relx=0.212,rely=0.34)
+            self.spinbox[2].place(relx=0.275,rely=0.34)
+            self.button_dv[0].place(relx=0.27,rely=0.42)
+            self.button_dv[1].place(relx=0.15,rely=0.42)
             self.title_dv.place(relx=0.175,rely=0.065)
             self.line_dv[0] = self.can.create_line(-10,180,250,180)
             self.line_dv[1] = self.can.create_line(250,-3,250,180)
@@ -102,16 +102,22 @@ class App(Frame):
 
     def thanhToan(self):
         if(self.trangThai[1]== None):
+            for a in range(0,2):
+                self.line_dv.append([])
             self.kiemTraTrangThai(1)
             self.trangThai[1]=1
-            self.title_tt = Label(self.can,text="Thanh toan ve tau",background='MediumPurple1')
-            self.label_tt = Label(self.can,text="Ma dat truoc",background='MediumPurple1')
+            # self.canThanhToan = Canvas(self.can,width=300,height=180,bg='blue',highlightthickness=0)
+            # self.canThanhToan.place(x=0,y=0)
+            self.title_tt = Label(self.can,text="Thanh toan ve tau",background='thistle1')
+            self.label_tt = Label(self.can,text="Ma dat truoc",background='thistle1')
             self.entry_tt = Entry(self.can)
             self.button_tt = Button(self.can,text="Tim kiem")
             self.title_tt.place(relx=0.125,rely=0.065)
             self.label_tt.place(relx=0.05,rely=0.2)
             self.entry_tt.place(relx=0.175,rely=0.2)
             self.button_tt.place(relx=0.3,rely=0.4)
+            self.line_dv[0] = self.can.create_line(-10,180,250,180)
+            self.line_dv[1] = self.can.create_line(250,-3,250,180)
         elif(self.trangThai[1]==0):
             self.kiemTraTrangThai(1)    
             self.trangThai[1]=1
@@ -121,19 +127,24 @@ class App(Frame):
 
     def timKiem(self):
         if(self.trangThai[2]==None):
+            for a in range(0,2):
+                self.line_dv.append([])
             self.kiemTraTrangThai(2)
             self.trangThai[2]=1
-            self.title_tk = Label(self.can,text="Tim kiem ve tau",background='MediumPurple1')
-            self.label_tk = Label(self.can,text="Ma ve tau",background='MediumPurple1')
+            self.title_tk = Label(self.can,text="Tim kiem ve tau",background='thistle1')
+            self.label_tk = Label(self.can,text="Ma ve tau",background='thistle1')
             self.entry_tk = Entry(self.can)
             self.button_tk = Button(self.can,text="Tim kiem")
             self.title_tk.place(relx=0.125,rely=0.065)
             self.label_tk.place(relx=0.05,rely=0.2)
             self.entry_tk.place(relx=0.175,rely=0.2)
             self.button_tk.place(relx=0.3,rely=0.4)
+            self.line_dv[0] = self.can.create_line(-10,180,250,180)
+            self.line_dv[1] = self.can.create_line(250,-3,250,180)
         elif(self.trangThai[2]==0):
             self.kiemTraTrangThai(2)
             self.trangThai[2]=1
+            self.hienThiTimKiemVe()
         else:
             pass
 
@@ -175,8 +186,8 @@ class App(Frame):
             ,bg='MediumPurple1',highlightbackground='MediumPurple1'
             """
             self.themDanhSachVe()
-            self.title_tv.place(relx=0.6,rely=0.065)
-            self.button_tv[0].place(x=250,y=45)
+            self.title_tv.place(relx=0.6,rely=0.05)
+            self.button_tv[0].place(x=251,y=45)
             self.button_tv[1].place(x=280,y=45)
             self.button_tv[2].place(x=345,y=45)
             self.button_tv[3].place(x=410,y=45)
@@ -239,15 +250,15 @@ class App(Frame):
         return
 
     def hienThiDacVeTau(self):
-        self.label_dv[0].place(relx=0.1,rely=0.15)
-        self.label_dv[1].place(relx=0.1,rely=0.25)
-        self.cbb_dv[0].place(relx=0.2,rely=0.15)
-        self.cbb_dv[1].place(relx=0.2,rely=0.25)
-        self.spinbox[0].place(relx=0.2,rely=0.34)
-        self.spinbox[1].place(relx=0.25,rely=0.34)
-        self.spinbox[2].place(relx=0.3,rely=0.34)
-        self.button_dv[0].place(relx=0.3,rely=0.42)
-        self.button_dv[1].place(relx=0.2,rely=0.42)
+        self.label_dv[0].place(relx=0.05,rely=0.15)
+        self.label_dv[1].place(relx=0.05,rely=0.25)
+        self.cbb_dv[0].place(relx=0.15,rely=0.15)
+        self.cbb_dv[1].place(relx=0.15,rely=0.25)
+        self.spinbox[0].place(relx=0.15,rely=0.34)
+        self.spinbox[1].place(relx=0.212,rely=0.34)
+        self.spinbox[2].place(relx=0.275,rely=0.34)
+        self.button_dv[0].place(relx=0.27,rely=0.42)
+        self.button_dv[1].place(relx=0.15,rely=0.42)
         self.title_dv.place(relx=0.175,rely=0.065)
         self.line_dv[0] = self.can.create_line(-10,180,250,180)
         self.line_dv[1] = self.can.create_line(250,-3,250,180)
@@ -339,16 +350,16 @@ class App(Frame):
     
     def hienThiToaTau(self):
         if(self.viTritoa==0):
-            self.btnToaBack=Button(self.can,text="trang trước",highlightthickness=0,command=self.backToa)
-            self.btnToaNext=Button(self.can,text="trang tiếp",highlightthickness=0,command=self.nextToa)
-            self.btnOk = Button(self.can,text="chấp nhận",highlightthickness=0,command=self.oK)
-            self.title_toa=Label(self.can,text="",width=30)
+            self.btnToaBack=Button(self.can,text="Back",highlightthickness=0,command=self.backToa)
+            self.btnToaNext=Button(self.can,text="Next",highlightthickness=0,command=self.nextToa)
+            self.btnOk = Button(self.can,text="Accept",highlightthickness=0,command=self.oK)
+            self.title_toa=Label(self.can,text="",width=30,bg="thistle1")
             chuoi=(self.thongTinVe[0][2]+"-"+str(self.thongTinVe[0][4])+"VND")
             self.title_toa['text']=chuoi
-            self.btnToaBack.place(x=0,y=252)
-            self.btnToaNext.place(x=567,y=252)
-            self.title_toa.place(x=200,y=205)
-            self.btnOk.place(x=520,y=325)
+            self.btnToaBack.place(x=26,y=252)
+            self.btnToaNext.place(x=542,y=252)
+            self.title_toa.place(x=200,y=195)
+            self.btnOk.place(x=278,y=316)
             hcn1 =self.can.create_rectangle(40,200,560,325)
             hcn2 = self.can.create_rectangle(60,210,540,315)
             try:
@@ -362,12 +373,12 @@ class App(Frame):
             for i in range(16):
                 for j in range(4):
                     dem = i*4+j+1
-                    a=Button(self.can,text=dem,bg='blue',highlightthickness=0,width=2)
+                    a=Button(self.can,text=dem,bg='Light green',highlightthickness=0,width=2)
                     a['command']= self.callBackOnClickChoNgoi(btn=a,dem=dem)
-                    a.place(x=75+i*29,y=230+j*20)
+                    a.place(x=73+i*29,y=225+j*20)
                     if(self.thongTinVe[dem-1][3]=="Trống"):
                         try:
-                            self.button_ve[dem-1]=a
+                            self.button_ve[dem]=a
                         except:
                             self.button_ve.append(a)
                     else:
@@ -377,16 +388,16 @@ class App(Frame):
                             self.button_ve[dem-1]=a
                         except:
                             self.button_ve.append(a)
-                line_toa=self.can.create_line(74+i*29,230,74+i*29,310)
+                line_toa=self.can.create_line(73+i*29,209,73+i*29,209)
                 try:
                     self.line_toa[i+2]=line_toa
                 except:
                     self.line_toa.append(line_toa)
         elif(self.viTritoa==1):
-            self.btnToaBack.place(x=0,y=252)
-            self.btnToaNext.place(x=567,y=252)
-            self.title_toa.place(x=200,y=205)
-            self.btnOk.place(x=520,y=325)
+            self.btnToaBack.place(x=12,y=252)
+            self.btnToaNext.place(x=556,y=252)
+            self.title_toa.place(x=200,y=195)
+            self.btnOk.place(x=278,y=316)
             try:
                 self.line_toa[0]=self.can.create_rectangle(40,200,560,325)
                 self.line_toa[1]=self.can.create_rectangle(45,210,555,315)
@@ -398,8 +409,8 @@ class App(Frame):
             for i in range(20):
                 for j in range(4):
                     dem = i*4+j+1
-                    a=Button(self.can,text=dem,bg='blue',highlightthickness=0,width=2)
-                    a.place(x=53+i*25,y=230+j*20)
+                    a=Button(self.can,text=dem,bg='Light green',highlightthickness=0,width=2)
+                    a.place(x=52+i*25,y=223+j*20)
                     a['command']= self.callBackOnClickChoNgoi(btn=a,dem=dem+64-1)
                     if(self.thongTinVe[dem-1+64][3]=="Trống"):
                         try:
@@ -410,10 +421,10 @@ class App(Frame):
                         a["state"]=DISABLED
                         a["bg"]= 'red'
                         try:
-                            self.button_ve[dem-1+64]=a
+                            self.button_ve[dem+64]=a
                         except:
                             self.button_ve.append(a)
-                line_toa=self.can.create_line(52+i*25,230,52+i*25,310)
+                line_toa=self.can.create_line(52+i*25,212,52+i*25,212)
                 try:
                     self.line_toa[i+2]=line_toa
                 except:
@@ -421,22 +432,23 @@ class App(Frame):
         elif(self.viTritoa==2):#bien dem cho line
             chuoi=(self.thongTinVe[144][2]+"-"+str(self.thongTinVe[144][4])+"VND")
             self.title_toa['text']=chuoi
-            self.btnToaBack.place(x=0,y=252)
-            self.btnToaNext.place(x=567,y=252)
-            self.title_toa.place(x=200,y=205)
-            self.btnOk.place(x=520,y=325)
+            self.btnToaBack.place(x=26,y=252)
+            self.btnToaNext.place(x=542,y=252)
+            self.title_toa.place(x=200,y=195)
+            self.btnOk.place(x=278,y=316)
             try:
                 self.line_toa[0]=self.can.create_rectangle(40,200,560,325)
                 self.line_toa[1]=self.can.create_rectangle(60,210,540,315)
             except:
                 self.line_toa.append(self.can.create_rectangle(40,200,560,325))
                 self.line_toa.append(self.can.create_rectangle(60,210,540,315))
-            for i in range(11):
+            for i in range(14):
                 for j in range(2):
                     dem = i*2+j+1
-                    a=Button(self.can,text=dem,bg='blue',highlightthickness=0,width=2)
-                    a['command']= self.callBackOnClickChoNgoi(btn=a,dem=144+dem-1)
-                    a.place(x=63+i*35,y=230+j*40)
+                    print(dem)
+                    a=Button(self.can,text=dem,bg='Light green',highlightthickness=0,width=2)
+                    a['command']= self.callBackOnClickChoNgoi(btn=a,dem=144+dem)
+                    a.place(x=68+i*34,y=230+j*40)
                     if(self.thongTinVe[dem-1+144][3]=="Trống"):
                         try:
                             self.button_ve[dem-1]=a
@@ -449,28 +461,30 @@ class App(Frame):
                             self.button_ve[dem-1]=a
                         except:
                             self.button_ve.append(a)
-                    line_toa=self.can.create_line(62+i*35,230+j*40,62+i*35,260+j*40)
-                    try:
-                        self.line_toa[i*2+j+3]=line_toa
-                    except:
-                        self.line_toa.append(line_toa)
+                    # line_toa=self.can.create_line(68+i*36,210+j*40,68+i*36,250+j*40)
+                    # try:
+                    #     self.line_toa[i*2+j+3]=line_toa
+                    # except:
+                    #     self.line_toa.append(line_toa)
+                    if(i%2==0):
+                        self.can.create_rectangle(64+i*34,224,60+(i+2)*34,300)
         elif(self.viTritoa==3):#bien dem cho line
-            chuoi=(self.thongTinVe[168][2]+"-"+str(self.thongTinVe[172][4])+"VND")
+            chuoi=(self.thongTinVe[172][2]+"-"+str(self.thongTinVe[172][4])+"VND")
             self.title_toa['text']=chuoi
-            self.btnToaBack.place(x=0,y=252)
-            self.btnToaNext.place(x=567,y=252)
-            self.title_toa.place(x=200,y=205)
-            self.btnOk.place(x=520,y=325)
+            self.btnToaBack.place(x=26,y=252)
+            self.btnToaNext.place(x=542,y=252)
+            self.title_toa.place(x=200,y=195)
+            self.btnOk.place(x=278,y=316)
             self.line_toa.append(self.can.create_rectangle(40,200,560,325))
             self.line_toa.append(self.can.create_rectangle(60,210,540,315))
             for i in range(14):
                 for j in range(3):
                     dem = i*3+j+1
-                    a=Button(self.can,text=dem,bg='blue',highlightthickness=0,width=2)
+                    a=Button(self.can,text=dem,bg='Light green',highlightthickness=0,width=2)
                     a['command']= self.callBackOnClickChoNgoi(btn=a,dem=172+dem-1)
-                    a.place(x=63+i*35,y=230+j*40)
+                    a.place(x=68+i*34,y=222+j*30)
                     print(dem-1+168)
-                    if(self.thongTinVe[dem-1+168][3]=="Trống"):
+                    if(self.thongTinVe[dem-1+172][3]=="Trống"):
                         try:
                             self.button_ve[dem-1]=a
                         except:
@@ -482,11 +496,13 @@ class App(Frame):
                             self.button_ve[dem-1]=a
                         except:
                             self.button_ve.append(a)
-                    line_toa=self.can.create_line(62+i*35,230+j*40,62+i*35,260+j*40)
-                    try:
-                        self.line_toa[i+2]=line_toa
-                    except:
-                        self.line_toa.append(line_toa)
+                    # line_toa=self.can.create_line(62+i*35,230+j*40,62+i*35,260+j*40)
+                    # try:
+                    #     self.line_toa[i+2]=line_toa
+                    # except:
+                    #     self.line_toa.append(line_toa)
+                if(i%2==0):
+                    self.can.create_rectangle(64+i*34,218,60+(i+2)*34,310)
 
     def location(self,event):
         print(event.x,event.y)
@@ -540,7 +556,7 @@ class App(Frame):
         else:
             if kw['dem'] in self.danhSachVeChon:
                 print("true")
-                kw['btn']['bg']='blue'
+                kw['btn']['bg']='Light green'
                 index= self.danhSachVeChon.index(kw['dem'])
                 self.danhSachVeChon.remove(kw['dem'])
                 self.LabelDanhSachChonVe[index].pack_forget()
@@ -671,7 +687,7 @@ class UInhapThongTin(Frame):
         self.cbb.append(e)
         self.btn.append(Button(self.master,text="Trang tiếp",command=self.trangTiep))
         self.btn.append(Button(self.master,text="Trang trước",command=self.trangTruoc))
-        self.btn.append(Button(self.master,text="Dặt Trước",command= self.datTruoc))
+        self.btn.append(Button(self.master,text="Đặt Trước",command= self.datTruoc))
         self.btn.append(Button(self.master,text="Thanh Toán",command=self.thanhToan))
         self.btn[0].grid(column=4,row=4)
         self.btn[1].grid(column=0,row=4)
